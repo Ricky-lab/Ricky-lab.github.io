@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Dark Mode (Default) */
+    --background: 222.2 84% 4.5%;
+    --foreground: 210 40% 98%;
+    --primary: 199 89% 70%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 239 84% 67%;
+    --secondary-foreground: 210 40% 98%;
+    --accent: 239 84% 67%;
+    --accent-foreground: 210 40% 98%;
+    --muted: 215.4 16.3% 46.9%;
+    --muted-foreground: 215.4 20.2% 65.1%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --card: 222.2 84% 4.5%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.5%;
+    --popover-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --ring: 199 89% 70%;
+
+    /* Code Block */
+    --code-bg: 217.2 32.6% 11.5%;
+  }
+
+  .light {
+    /* Light Mode */
+    --background: 210 40% 98%;
+    --foreground: 222.2 47.4% 11.2%;
+    --primary: 199 83% 53%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 239 84% 67%;
+    --secondary-foreground: 210 40% 98%;
+    --accent: 239 84% 67%;
+    --accent-foreground: 210 40% 98%;
+    --muted: 215.4 16.3% 46.9%;
+    --muted-foreground: 215.4 20.2% 35.1%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --ring: 199 83% 53%;
+
+    /* Code Block */
+    --code-bg: 215.4 16.3% 96%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-background/80 backdrop-blur-xl border border-border/50;
+  }
+
+  .glow-border {
+    @apply relative;
+  }
+
+  .glow-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg;
+    background: linear-gradient(45deg, transparent 40%, rgba(56, 189, 248, 0.3) 50%, transparent 60%);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .glow-border:hover::before {
+    opacity: 1;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+
+  /* Code block styling */
+  .code-block {
+    @apply relative rounded-lg overflow-hidden;
+  }
+
+  .code-block pre {
+    @apply font-mono text-sm leading-relaxed;
+  }
+
+  .code-block .copy-btn {
+    @apply absolute top-2 right-2 p-2 rounded-md opacity-0 transition-opacity duration-200;
+  }
+
+  .code-block:hover .copy-btn {
+    @apply opacity-100;
+  }
+
+  /* Shimmer loading effect */
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+
+  .shimmer::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(56, 189, 248, 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+    @apply animate-shimmer;
+  }
+
+  /* Typewriter cursor */
+  .cursor {
+    @apply inline-block w-[2px] h-[1.2em] ml-1 bg-primary animate-blink;
+    vertical-align: text-bottom;
+  }
+}
+
+@layer utilities {
+  .max-w-article {
+    max-width: 768px;
+  }
+
+  .max-w-home {
+    max-width: 1024px;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
